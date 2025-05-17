@@ -1,4 +1,4 @@
-![image-20250517142803822](C:/Users/robin/AppData/Roaming/Typora/typora-user-images/image-20250517142803822.png)
+
 
 # Simplicity
 
