@@ -1,0 +1,90 @@
+<!-- 首页模板 -->
+<div class="index-container">
+  <!-- 首页横幅 -->
+  <% if(theme.index && theme.index.banner_img){ %>
+    <div class="banner">
+      <div class="banner-image" style="background-image: url('<%- url_for(theme.index.banner_img) %>');">
+        <div class="banner-content">
+          <% if(theme.index.banner_title){ %>
+            <h1 class="banner-title"><%= theme.index.banner_title %></h1>
+          <% } %>
+          <% if(theme.index.banner_desc){ %>
+            <p class="banner-desc"><%= theme.index.banner_desc %></p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- 文章列表 -->
+  <div class="post-list">
+    <% page.posts.each(function(post){ %>
+      <div class="post-item">
+        <div class="post-info">
+          <!-- 文章日期 -->
+          <% if(theme.post.show_date){ %>
+            <span class="post-date">
+              <i class="fa fa-calendar"></i> <%= date(post.date, "YYYY-MM-DD") %>
+            </span>
+          <% } %>
+          
+          <!-- 文章分类 -->
+          <% if(theme.post.show_category && post.categories && post.categories.length){ %>
+            <span class="post-category">
+              <i class="fa fa-folder"></i>
+              <%- list_categories(post.categories, {
+                show_count: false,
+                class: 'post-category',
+                style: 'none',
+                separator: ' '
+              }) %>
+            </span>
+          <% } %>
+        </div>
+        
+        <!-- 文章标题 -->
+        <h2 class="post-title">
+          <a href="<%- url_for(post.path) %>"><%= post.title || '无标题' %></a>
+        </h2>
+        
+        <!-- 文章摘要 -->
+        <div class="post-excerpt">
+          <% if(post.excerpt) { %>
+            <%- post.excerpt %>
+          <% } else { %>
+            <%- truncate(strip_html(post.content), {length: 200, omission: '...'}) %>
+          <% } %>
+        </div>
+        
+        <!-- 阅读更多 -->
+        <div class="post-more">
+          <a href="<%- url_for(post.path) %>" class="read-more">阅读更多</a>
+          
+          <!-- 文章标签 -->
+          <% if(theme.post.show_tag && post.tags && post.tags.length){ %>
+            <div class="post-tags">
+              <i class="fa fa-tags"></i>
+              <%- list_tags(post.tags, {
+                show_count: false,
+                class: 'post-tag',
+                style: 'none',
+                separator: ' '
+              }) %>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  
+  <!-- 分页 -->
+  <% if (page.total > 1){ %>
+    <div class="pagination">
+      <%- paginator({
+        prev_text: '<i class="fa fa-angle-left"></i>',
+        next_text: '<i class="fa fa-angle-right"></i>',
+        mid_size: 1
+      }) %>
+    </div>
+  <% } %>
+</div>

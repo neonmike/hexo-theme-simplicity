@@ -1,0 +1,112 @@
+# Hexo主题配置文件 - Simplicity
+
+# 主题基本信息
+theme_name: Simplicity
+version: 1.0.0
+author: Manus AI
+description: 一个简约风格的个人博客Hexo主题
+
+# 导航菜单配置
+menu:
+  首页: /
+  归档: /archives
+  分类: /categories
+  标签: /tags
+  关于: /about
+
+# 侧边栏配置
+sidebar:
+  position: right # 侧边栏位置：left 或 right
+  widgets:
+    - profile
+    - category
+    - tag
+    - recent_posts
+    - archive
+    - search
+
+# 个人资料配置
+profile:
+  avatar: /img/avatar.jpg # 头像路径
+  author: 博主名称 # 博主名称
+  author_title: 职业头衔 # 职业头衔或简介
+  location: 城市, 国家 # 所在地
+  follow: 关注我 # 关注按钮文字
+
+# 社交媒体链接
+social:
+  github: https://github.com/yourusername
+  twitter: https://twitter.com/yourusername
+  facebook: https://facebook.com/yourusername
+  instagram: https://instagram.com/yourusername
+  weibo: https://weibo.com/yourusername
+  zhihu: https://zhihu.com/people/yourusername
+  email: your.email@example.com
+
+# 首页配置
+index:
+  banner_img: /img/banner.jpg # 首页横幅图片
+  banner_title: 欢迎来到我的博客 # 横幅标题
+  banner_desc: 分享我的想法和经验 # 横幅描述
+  post_list_count: 10 # 首页文章列表显示数量
+
+# 文章页配置
+post:
+  show_date: true # 显示日期
+  show_category: true # 显示分类
+  show_tag: true # 显示标签
+  show_toc: true # 显示目录
+  toc_depth: 3 # 目录深度
+  copyright: true # 显示版权信息
+  copyright_text: 本文由作者原创，转载请注明出处。 # 版权信息文字
+
+# 归档页配置
+archive:
+  posts_count: 20 # 每页显示文章数量
+  order: -1 # 排序方式：1 为升序，-1 为降序
+
+# 分类页配置
+category:
+  posts_count: 20 # 每页显示文章数量
+
+# 标签页配置
+tag:
+  posts_count: 20 # 每页显示文章数量
+
+# 评论系统配置
+comments:
+  enable: true # 是否启用评论
+  type: disqus # 评论系统类型：disqus, valine, gitalk 等
+  disqus_shortname: your-disqus-shortname # Disqus短名称
+  # 其他评论系统配置...
+
+# 搜索功能配置
+search:
+  enable: true # 是否启用搜索
+  path: search.xml # 搜索数据文件路径
+  field: post # 搜索范围：post 或 all
+  content: true # 是否搜索内容
+
+# 代码高亮配置
+highlight:
+  enable: true # 是否启用代码高亮
+  line_number: true # 显示行号
+  auto_detect: false # 自动检测语言
+  tab_replace: '  ' # 替换Tab的空格数
+
+# 数学公式支持
+mathjax:
+  enable: false # 是否启用MathJax
+
+# 图片懒加载
+lazyload:
+  enable: true # 是否启用图片懒加载
+
+# 页脚配置
+footer:
+  copyright: © 2025 您的博客名称 # 版权信息
+  powered: true # 显示"由Hexo强力驱动"
+  theme: true # 显示"主题 - Simplicity"
+
+# 其他配置
+favicon: /img/favicon.ico # 网站图标

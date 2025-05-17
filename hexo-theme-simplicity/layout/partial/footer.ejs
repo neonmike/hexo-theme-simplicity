@@ -1,0 +1,25 @@
+<!-- 页脚模板 -->
+<footer class="footer">
+  <div class="footer-inner">
+    <!-- 版权信息 -->
+    <div class="copyright">
+      <% if (theme.footer.copyright) { %>
+        <span><%= theme.footer.copyright %></span>
+      <% } %>
+    </div>
+    
+    <!-- Hexo链接 -->
+    <% if (theme.footer.powered) { %>
+      <div class="powered">
+        <span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动</span>
+      </div>
+    <% } %>
+    
+    <!-- 主题链接 -->
+    <% if (theme.footer.theme) { %>
+      <div class="theme-info">
+        <span>主题 - <a href="https://github.com/yourusername/hexo-theme-simplicity" target="_blank" rel="noopener">Simplicity</a></span>
+      </div>
+    <% } %>
+  </div>
+</footer>

@@ -1,0 +1,108 @@
+<!-- 侧边栏模板 -->
+<div class="sidebar-inner">
+  <!-- 侧边栏小部件 -->
+  <% if (theme.sidebar && theme.sidebar.widgets) { %>
+    <% theme.sidebar.widgets.forEach(function(widget) { %>
+      <div class="widget-wrap">
+        <% if (widget === 'profile') { %>
+          <!-- 个人资料小部件 -->
+          <div class="widget-profile">
+            <div class="profile-img">
+              <img src="<%- url_for(theme.profile.avatar) %>" alt="<%= theme.profile.author %>">
+            </div>
+            <div class="profile-info">
+              <h3 class="profile-name"><%= theme.profile.author %></h3>
+              <p class="profile-title"><%= theme.profile.author_title %></p>
+              <p class="profile-location">
+                <i class="fa fa-map-marker"></i> <%= theme.profile.location %>
+              </p>
+              <div class="profile-social">
+                <% for (let platform in theme.social) { %>
+                  <a href="<%= theme.social[platform] %>" target="_blank" rel="noopener" title="<%= platform %>">
+                    <i class="fa fa-<%= platform.toLowerCase() %>"></i>
+                  </a>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% } else if (widget === 'search') { %>
+          <!-- 搜索小部件 -->
+          <div class="widget-search">
+            <div class="search-form">
+              <input type="text" id="search-input" placeholder="搜索...">
+              <button type="submit" id="search-submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+            <div id="search-result"></div>
+          </div>
+        <% } else if (widget === 'category') { %>
+          <!-- 分类小部件 -->
+          <div class="widget-category">
+            <h3 class="widget-title">
+              <i class="fa fa-folder"></i> 分类
+            </h3>
+            <div class="category-list">
+              <%- list_categories({
+                show_count: true,
+                depth: 1,
+                class: 'category-list-item',
+                style: 'list'
+              }) %>
+            </div>
+          </div>
+        <% } else if (widget === 'tag') { %>
+          <!-- 标签小部件 -->
+          <div class="widget-tag">
+            <h3 class="widget-title">
+              <i class="fa fa-tags"></i> 标签云
+            </h3>
+            <div class="tag-cloud">
+              <%- tagcloud({
+                min_font: 12,
+                max_font: 20,
+                amount: 40,
+                color: true,
+                start_color: '#999',
+                end_color: '#333'
+              }) %>
+            </div>
+          </div>
+        <% } else if (widget === 'recent_posts') { %>
+          <!-- 最新文章小部件 -->
+          <div class="widget-recent-posts">
+            <h3 class="widget-title">
+              <i class="fa fa-file-text"></i> 最新文章
+            </h3>
+            <ul class="recent-post-list">
+              <% site.posts.sort('date', -1).limit(5).each(function(post){ %>
+                <li class="recent-post-item">
+                  <a href="<%- url_for(post.path) %>">
+                    <span class="recent-post-title"><%= post.title || '无标题' %></span>
+                    <span class="recent-post-date"><%= date(post.date, 'MM-DD') %></span>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } else if (widget === 'archive') { %>
+          <!-- 归档小部件 -->
+          <div class="widget-archive">
+            <h3 class="widget-title">
+              <i class="fa fa-archive"></i> 归档
+            </h3>
+            <div class="archive-list">
+              <%- list_archives({
+                show_count: true,
+                type: 'monthly',
+                format: 'YYYY年MM月',
+                style: 'list',
+                separator: ''
+              }) %>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    <% }) %>
+  <% } %>
+</div>

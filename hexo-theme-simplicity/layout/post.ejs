@@ -1,0 +1,134 @@
+<!-- 文章页模板 -->
+<div class="post-container">
+  <article class="post">
+    <!-- 文章标题 -->
+    <h1 class="post-title"><%= page.title || '无标题' %></h1>
+    
+    <!-- 文章信息 -->
+    <div class="post-meta">
+      <!-- 发布日期 -->
+      <% if(theme.post.show_date){ %>
+        <span class="post-date">
+          <i class="fa fa-calendar"></i> <%= date(page.date, "YYYY-MM-DD") %>
+        </span>
+      <% } %>
+      
+      <!-- 文章分类 -->
+      <% if(theme.post.show_category && page.categories && page.categories.length){ %>
+        <span class="post-category">
+          <i class="fa fa-folder"></i>
+          <%- list_categories(page.categories, {
+            show_count: false,
+            class: 'post-category',
+            style: 'none',
+            separator: ' '
+          }) %>
+        </span>
+      <% } %>
+      
+      <!-- 阅读时间估计 -->
+      <span class="post-reading-time">
+        <i class="fa fa-clock-o"></i> <%= min2read(page.content) %> 分钟阅读
+      </span>
+    </div>
+    
+    <!-- 文章目录 -->
+    <% if(theme.post.show_toc && toc(page.content)){ %>
+      <div class="post-toc">
+        <div class="toc-title">目录</div>
+        <div class="toc-content">
+          <%- toc(page.content, {list_number: true, max_depth: theme.post.toc_depth || 3}) %>
+        </div>
+      </div>
+    <% } %>
+    
+    <!-- 文章内容 -->
+    <div class="post-content">
+      <%- page.content %>
+    </div>
+    
+    <!-- 文章标签 -->
+    <% if(theme.post.show_tag && page.tags && page.tags.length){ %>
+      <div class="post-tags">
+        <i class="fa fa-tags"></i>
+        <%- list_tags(page.tags, {
+          show_count: false,
+          class: 'post-tag',
+          style: 'none',
+          separator: ' '
+        }) %>
+      </div>
+    <% } %>
+    
+    <!-- 版权信息 -->
+    <% if(theme.post.copyright){ %>
+      <div class="post-copyright">
+        <div class="copyright-title">
+          <i class="fa fa-copyright"></i> 版权声明
+        </div>
+        <div class="copyright-content">
+          <p>
+            本文标题：<a href="<%= page.permalink %>"><%= page.title %></a>
+          </p>
+          <p>
+            本文作者：<a href="<%= config.url %>"><%= config.author %></a>
+          </p>
+          <p>
+            发布时间：<%= date(page.date, "YYYY-MM-DD HH:mm:ss") %>
+          </p>
+          <p>
+            最后更新：<%= date(page.updated, "YYYY-MM-DD HH:mm:ss") %>
+          </p>
+          <p>
+            原始链接：<a href="<%= page.permalink %>"><%= page.permalink %></a>
+          </p>
+          <p>
+            <%= theme.post.copyright_text || '本文由作者原创，转载请注明出处。' %>
+          </p>
+        </div>
+      </div>
+    <% } %>
+    
+    <!-- 上一篇/下一篇 -->
+    <div class="post-nav">
+      <% if(page.prev){ %>
+        <div class="post-nav-prev">
+          <a href="<%- url_for(page.prev.path) %>" title="<%= page.prev.title %>">
+            <i class="fa fa-angle-left"></i> <%= page.prev.title %>
+          </a>
+        </div>
+      <% } %>
+      <% if(page.next){ %>
+        <div class="post-nav-next">
+          <a href="<%- url_for(page.next.path) %>" title="<%= page.next.title %>">
+            <%= page.next.title %> <i class="fa fa-angle-right"></i>
+          </a>
+        </div>
+      <% } %>
+    </div>
+  </article>
+  
+  <!-- 评论系统 -->
+  <% if(theme.comments && theme.comments.enable){ %>
+    <div class="post-comments">
+      <% if(theme.comments.type === 'disqus'){ %>
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+            this.page.url = '<%= page.permalink %>';
+            this.page.identifier = '<%= page.path %>';
+          };
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://<%= theme.comments.disqus_shortname %>.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <% } %>
+      
+      <!-- 其他评论系统可以在这里添加 -->
+    </div>
+  <% } %>
+</div>

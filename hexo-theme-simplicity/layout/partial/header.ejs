@@ -1,0 +1,34 @@
+<!-- 页头模板 -->
+<header class="header">
+  <div class="header-inner">
+    <!-- 网站标题/Logo -->
+    <div class="site-brand">
+      <a href="<%- url_for('/') %>" class="brand">
+        <% if (theme.logo) { %>
+          <img src="<%- url_for(theme.logo) %>" alt="<%= config.title %>" class="logo">
+        <% } else { %>
+          <span class="site-title"><%= config.title %></span>
+        <% } %>
+      </a>
+      <% if (config.subtitle) { %>
+        <p class="site-subtitle"><%= config.subtitle %></p>
+      <% } %>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <nav class="site-nav">
+      <button class="menu-toggle">
+        <i class="fa fa-bars"></i>
+      </button>
+      <ul class="menu">
+        <% for (let i in theme.menu) { %>
+          <li class="menu-item">
+            <a href="<%- url_for(theme.menu[i]) %>" class="menu-link">
+              <%= i %>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>
