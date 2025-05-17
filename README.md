@@ -1,3 +1,7 @@
+![image](https://github.com/user-attachments/assets/c58a96ce-71da-4a43-8a2b-fff54bfa41fa)
+
+
+
 # hexo-theme-simplicity
 
 这是一个 针对Manus 测评做出的Hexo 主题模板
